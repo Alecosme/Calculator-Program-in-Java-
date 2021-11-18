@@ -1,3 +1,6 @@
+
+import java.awt.Toolkit;
+
 // Nelson Alejadro Cosme Diaz 10142016
 // Calculadora
 
@@ -12,6 +15,8 @@ Sumar suma1 = new Sumar();
 Resta resta1 = new Resta();
 Multiplicar multiplicacion1 = new Multiplicar();
 Division division1 = new Division();
+Porcentaje porcentaje1 = new Porcentaje();
+Potencia potencia1 = new Potencia();
 
 
 
@@ -20,7 +25,7 @@ Division division1 = new Division();
     public Calculadora() {
         initComponents();
         setLocationRelativeTo(null);
-        
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagenes/calculadora.png")));
     }
 
     
@@ -660,8 +665,12 @@ Division division1 = new Division();
     }// </editor-fold>//GEN-END:initComponents
 
     private void elevadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elevadorActionPerformed
-         agregarEnPantalla("^");  
-          System.out.println("Se presiono ^");
+          
+         this.signo="^";
+        System.out.println("Se presiono ^");
+        String num1texto = textooperacion.getText();
+       this.num1= Double.parseDouble(num1texto);
+       textooperacion.setText("");
     }//GEN-LAST:event_elevadorActionPerformed
 
     private void divisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divisionActionPerformed
@@ -674,7 +683,9 @@ Division division1 = new Division();
     }//GEN-LAST:event_divisionActionPerformed
 
     private void resultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultadoActionPerformed
-    String num2texto = textooperacion.getText();
+    
+        System.out.println("Se presiono Result ");
+        String num2texto = textooperacion.getText();
     if(this.signo=="+"){
        this.num2= Double.parseDouble(num2texto);
         Double resultado1 =suma1.execute(num1, num2);
@@ -700,11 +711,34 @@ Division division1 = new Division();
         String resultadofinal = resultado1.toString();
         textoresultado.setText(resultadofinal);
         textooperacion.setText("");}
+    else if(this.signo== "%"){
+      this.num2= Double.parseDouble(num2texto);
+        Double resultado1 =porcentaje1.execute(num1, num2);
+        String resultadofinal = resultado1.toString();
+        textoresultado.setText(resultadofinal);
+        textooperacion.setText("");}
+    else if(this.signo== "^"){
+      this.num2= Double.parseDouble(num2texto);
+        Double resultado1 =potencia1.execute(num1, num2);
+        String resultadofinal = resultado1.toString();
+        textoresultado.setText(resultadofinal);
+        textooperacion.setText("");}
     
     }//GEN-LAST:event_resultadoActionPerformed
 
     private void porcentajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_porcentajeActionPerformed
-         agregarEnPantalla("%");   System.out.println("Se presiono %");
+            
+        
+         this.signo="%";
+        System.out.println("Se presiono %");
+        String num1texto = textooperacion.getText();
+       this.num1= Double.parseDouble(num1texto);
+       textooperacion.setText("");
+       Double resultado1 =porcentaje1.execute(num1, 0);
+        String resultadofinal = resultado1.toString();
+        textoresultado.setText(resultadofinal);
+        textooperacion.setText("");
+        
     }//GEN-LAST:event_porcentajeActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
@@ -800,6 +834,7 @@ Division division1 = new Division();
         String num1texto = textooperacion.getText();
        this.num1= Double.parseDouble(num1texto);
        textooperacion.setText("");
+       
         
     
     
